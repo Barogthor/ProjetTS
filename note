@@ -1,0 +1,22 @@
+utilsier never quand aucun retour
+
+préferer type unknown plutot que any
+
+on peut déclarer la portée de l'attribut dans le constructeur directement
+
+example custom dectorateur
+function log<T extends {new(...args:any[]):{}}>(constructor: T): T {
+  return class extends constructor {
+    protected additionalProperty: string = 'Hello';
+
+    constructor() {
+      super();
+      console.log(`Person constructor called with ${this.additionalProperty}`);
+    }
+  }
+}
+
+@log
+class Person {
+  /* ... */
+}
