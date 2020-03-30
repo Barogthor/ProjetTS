@@ -1,16 +1,4 @@
-
-export class Combat{
-    private pokemon1Turn: boolean
-    constructor(private pokemon1: Pokemon, private pokemon2: Pokemon) {
-        this.pokemon1Turn = true
-    }
-    attaque(){
-        const attacker = this.pokemon1Turn ? this.pokemon1 : this.pokemon2;
-        const defender = this.pokemon1Turn ? this.pokemon2 : this.pokemon1;
-        console.log(`${attacker.getName()} attaque ${this.pokemon2.getName()}`);
-        this.pokemon1Turn = !this.pokemon1Turn
-    }
-}
+import {Combat} from "./combat";
 
 export class Pokemon{
 
@@ -52,5 +40,9 @@ const pikachu = new Pokemon("Pikachu", 1, 35, 55, 40, 50, 50, 90)
 const salameche = new Pokemon("Salamèche", 1, 39, 52, 43, 60, 50, 65)
 const combat = new Combat(pikachu, salameche)
 
+combat.attaque()
+combat.attaque()
+combat.attaque()
+combat.attaque()
 
 
