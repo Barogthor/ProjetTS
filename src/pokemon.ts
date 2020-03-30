@@ -55,8 +55,12 @@ export class Pokemon{
     }
 
     doAttack(){
+        if(!this.currentCombat)
+            throw new Error("Not in combat");
+        if(this.isDead())
+            throw new Error(`${this.name} can't attack when already dead`);
         const v1 = Math.floor(2 * this.level / 5 + 2) * this.getAttack() * 2
-        this.currentCombat?.attaque(v1);
+        this.currentCombat.attaque(v1);
     }
 
     enterCombat(combat: Combat){
@@ -67,13 +71,7 @@ export class Pokemon{
         this.currentCombat = undefined;
     }
 
-
-
 }
-
-const pikachu = new Pokemon("Pikachu", 1, 35, 55, 40, 50, 50, 90)
-const salameche = new Pokemon("Salamèche", 1, 39, 52, 43, 60, 50, 65)
-
 
 
 

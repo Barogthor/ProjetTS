@@ -34,8 +34,14 @@ export class Combat{
     }
 
     attaque(damage: number){
-        this.getDefender().doDefend(damage)
-        this.pokemonTurn.next()
+        if(this.getDefender().isDead())
+            throw  new Error(`${this.getDefender().getName()} is dead`);
+        else
+            this.getDefender().doDefend(damage)
+            this.pokemonTurn.next()
+
     }
+
+
 
 }

@@ -17,6 +17,18 @@ describe("Check pokemon fight", () => {
             attackAndCheck(salameche, pikachu, 16-(2*i))
         }
 
+        try {
+            pikachu.doAttack()
+        } catch (e){
+            expect(e).toThrow(new Error("Pikachu can't attack when already dead"))
+        }
+        try {
+            salameche.doAttack()
+        } catch (e){
+            expect(e).toThrow(new Error("Pikachu is dead"))
+        }
+
+
     })
 
 })
