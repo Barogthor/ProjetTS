@@ -1,18 +1,17 @@
 import {Pokemon} from "../src/pokemon";
+import {CombatTurn} from "../src/combat";
 
-const whichTurn:  (pokemon1: Pokemon, pokemon2: Pokemon) => Pokemon = (pokemon1, pokemon2) => {
-    return pokemon1.getSpeed() >= pokemon2.getSpeed() ? pokemon1 : pokemon2
-}
 
 describe("Check which pokemon start the fight", () => {
-    const pikachu = new Pokemon("Pikachu", 1, 35, 55, 40, 50, 50, 90)
-    const salameche = new Pokemon("Salamèche", 1, 39, 52, 43, 60, 50, 65)
+    const pikachu = new Pokemon("Pikachu", 5, 35, 55, 40, 50, 50, 90)
+    const salameche = new Pokemon("Salamèche", 5, 39, 52, 43, 60, 50, 65)
+    const turn = new CombatTurn(pikachu, salameche);
 
-    test("Pikachu start the fight", () => {
-        expect(whichTurn(pikachu, salameche)).toBe(pikachu)
+    it("Pikachu start the fight", () => {
+        expect(turn.getAttacker()).toBe(pikachu)
     })
-    test("Salameche wait his turn", () => {
-        expect(whichTurn(pikachu, salameche)).not.toBe(salameche)
+    it("Salameche wait his turn", () => {
+        expect(turn.getDefender()).toBe(salameche)
     })
 
 })

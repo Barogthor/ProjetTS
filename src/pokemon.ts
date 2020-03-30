@@ -1,6 +1,8 @@
 import {Combat} from "./combat";
 
 export class Pokemon{
+    private currentCombat?: Combat;
+    private currentHp: number;
 
     constructor(private name: string,
                 private level: number,
@@ -10,6 +12,7 @@ export class Pokemon{
                 private attackSFX: number,
                 private defenseSFX: number,
                 private speed: number) {
+        this.currentHp = this.getHP();
     }
     getName(): string {
         return this.name
@@ -18,31 +21,59 @@ export class Pokemon{
         return this.level
     }
     getHP(): number {
-        const v1 = Math.floor((2 * this.hp) * this.level / 100 + 5)
+        const v1 = Math.floor((2 * this.hp + 5) * this.level / 100 + this.level + 10)
         return v1
     }
     getAttack(): number {
-        const v1 = Math.floor((2 * this.attack) * this.level / 100 + 5)
+        const v1 = Math.floor((2 * this.attack + 5) * this.level / 100 + 5)
         return v1
     }
     getDefense(): number {
-        const v1 = Math.floor((2 * this.defense) * this.level / 100 + 5)
+        const v1 = Math.floor((2 * this.defense + 5) * this.level / 100 + 5)
+        return v1
+    }
+    getAttackSFX(): number {
+        const v1 = Math.floor((2 * this.attackSFX + 5) * this.level / 100 + 5)
+        return v1
+    }
+    getDefenseSFX(): number {
+        const v1 = Math.floor((2 * this.defenseSFX + 5) * this.level / 100 + 5)
         return v1
     }
     getSpeed(): number {
-        const v1 = Math.floor((2 * this.speed) * this.level / 100 + 5)
+        const v1 = Math.floor((2 * this.speed + 5) * this.level / 100 + 5)
         return v1
     }
+
+    getCurrentHp = () => this.currentHp
+    isDead = () => this.currentHp <= 0
+
+    doDefend(damage: number){
+        const v1 = Math.floor(damage / this.getDefense())
+        const v2 = Math.floor(v1 / 50) + 2
+        this.currentHp -= v2
+    }
+
+    doAttack(){
+        const v1 = Math.floor(2 * this.level / 5 + 2) * this.getAttack() * 2
+        this.currentCombat?.attaque(v1);
+    }
+
+    enterCombat(combat: Combat){
+        this.currentCombat = combat;
+    }
+
+    leaveCombat(){
+        this.currentCombat = undefined;
+    }
+
+
 
 }
 
 const pikachu = new Pokemon("Pikachu", 1, 35, 55, 40, 50, 50, 90)
 const salameche = new Pokemon("Salamèche", 1, 39, 52, 43, 60, 50, 65)
-const combat = new Combat(pikachu, salameche)
 
-combat.attaque()
-combat.attaque()
-combat.attaque()
-combat.attaque()
+
 
 
