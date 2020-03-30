@@ -7,6 +7,9 @@
     "run": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Barogthor/ProjetTS.git"
